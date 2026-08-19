@@ -1,40 +1,73 @@
 .page {
   width: min(1100px, 92%);
-  margin: 2rem auto;
+  margin: 0 auto;
+  padding: 2.5rem 0 4rem;
+}
+
+.page h1 {
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
 }
 
 .message {
-  background: #fff7ed;
-  border: 1px solid #fdba74;
+  background: var(--color-primary-tint);
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary-dark);
   padding: 0.75rem 1rem;
-  border-radius: 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
 }
 
 .form-section {
-  background: white;
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-  border-radius: 0.75rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  padding: 1.75rem;
+  margin-bottom: 2.5rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+.form-section h2 {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-muted);
+  margin-bottom: 1.25rem;
 }
 
 form {
   display: grid;
-  gap: 1rem;
+  gap: 1.1rem;
 }
 
 label {
   display: grid;
   gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 input,
 textarea,
 select {
   width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: 0.4rem;
-  font: inherit;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font: 0.95rem var(--font-body);
+  color: var(--color-ink);
+  background: var(--color-surface);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--color-primary);
 }
 
 .form-actions {
@@ -44,29 +77,56 @@ select {
 
 .doctor-list {
   display: grid;
-  grid-template-columns:
-    repeat(
-      auto-fit,
-      minmax(250px, 1fr)
-    );
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .doctor-card {
-  background: white;
-  padding: 1.25rem;
-  border-radius: 0.75rem;
+  background: var(--color-surface);
+  padding: 1.35rem 1.35rem 1.1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-accent);
+  box-shadow: var(--shadow-card);
   display: grid;
-  gap: 0.5rem;
+  gap: 0.4rem;
   align-content: start;
 }
 
 .doctor-card.inactive {
-  opacity: 0.55;
+  border-left-color: var(--color-border);
+  opacity: 0.6;
 }
 
-.status {
-  font-size: 0.85rem;
-  color: #555;
+.doctor-card h2 {
+  font-size: 1.05rem;
+}
+
+.doctor-card p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.88rem;
+}
+
+.doctor-card .status {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-primary-dark);
+  margin: 0.3rem 0 0.5rem;
+}
+
+.doctor-card.inactive .status {
+  color: var(--color-muted);
+}
+
+.doctor-card button {
+  justify-self: start;
+  margin-top: 0.25rem;
+}
+
+.doctor-card button + button {
+  margin-left: 0.5rem;
 }
