@@ -2,25 +2,24 @@
 
 :root {
   /* Color */
-  --color-bg: #F4F6F7;
-  --color-surface: #FFFFFF;
-  --color-ink: #142433;
-  --color-muted: #64748B;
-  --color-border: #E1E7EB;
-  --color-primary: #0F7173;
-  --color-primary-dark: #0B5457;
-  --color-primary-tint: #E5F2F1;
+--color-bg: #0F141A;
+  --color-surface: #1C232B;
+  --color-ink: #E5E7EB;
+  --color-muted: #7b8490;
+  --color-border: #2C3A47;
+  --color-primary: #0EF5F9;
+  --color-primary-tint: #142433;
   --color-accent: #E4623F;
 
   /* Status */
-  --color-pending: #B4650C;
-  --color-pending-bg: #FBF0E1;
-  --color-confirmed: #0ef5f9;
-  --color-confirmed-bg: #E5F2F1;
-  --color-completed: #151f19;
-  --color-completed-bg: #E3F4EA;
-  --color-cancelled: #C43D33;
-  --color-cancelled-bg: #FBEAE8;
+  --color-pending: #FBBF24;
+  --color-pending-bg: #3B2F1C;
+  --color-confirmed: #34D399;
+  --color-confirmed-bg: #1E3A34;
+  --color-completed: #60A5FA;
+  --color-completed-bg: #1E3A5F;
+  --color-cancelled: #EF4444;
+  --color-cancelled-bg: #3B1C1C;
 
   /* Type */
   --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
@@ -30,7 +29,7 @@
   /* Shape */
   --radius-sm: 6px;
   --radius-md: 10px;
-  --shadow-card: 0 1px 2px rgba(20, 36, 51, 0.04), 0 1px 12px rgba(20, 36, 51, 0.05);
+  --shadow-card: 0 2px 6px rgba(0, 0, 0, 0.6);
 }
 
 * {
@@ -52,10 +51,11 @@ h1, h2, h3 {
   font-weight: 600;
   letter-spacing: -0.01em;
   margin: 0;
+  color: var(--color-primary);
 }
 
 a {
-  color: inherit;
+  color: var(--color-accent);
 }
 
 button {
@@ -64,7 +64,7 @@ button {
   border-radius: var(--radius-sm);
   padding: 0.6rem 1.1rem;
   background: var(--color-primary);
-  color: white;
+  color: #0F141A;
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.85rem;
@@ -89,7 +89,7 @@ textarea:focus-visible {
   outline-offset: 2px;
 }
 
-/* Secondary / destructive-lite button — the second button in a group of actions */
+/* Secondary / destructive-lite button */
 .page button[type="button"] {
   background: var(--color-surface);
   color: var(--color-ink);
@@ -97,7 +97,7 @@ textarea:focus-visible {
 }
 
 .page button[type="button"]:hover {
-  background: var(--color-bg);
+  background: var(--color-primary-tint);
 }
 
 @media (prefers-reduced-motion: reduce) {
