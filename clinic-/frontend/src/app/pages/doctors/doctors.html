@@ -1,0 +1,119 @@
+<section class="page">
+
+  <h1>Doctors</h1>
+
+  @if (loading()) {
+    <p>Loading doctors...</p>
+  }
+
+  @if (message()) {
+    <p class="message">{{ message() }}</p>
+  }
+
+  <div class="doctor-list">
+
+    @for (doctor of doctors(); track doctor._id) {
+
+      <article class="doctor-card" [class.inactive]="!doctor.isActive">
+
+        <h2>
+          {{ doctor.name }}
+        </h2>
+
+        <p>
+          {{ doctor.specialty }}
+        </p>
+
+        <p>
+          🏥 {{ branchName(doctor) }}
+        </p>
+
+        <p class="status">
+          {{ doctor.isActive ? 'Active' : 'Inactive' }}
+        </p>
+
+        <button type="button" (click)="startEdit(doctor)">
+          Edit
+        </button>
+
+        @if (doctor.isActive) {
+          <button type="button" (click)="deactivateDoctor(doctor._id)">
+            Deactivate
+          </button>
+        }
+
+      </article>
+
+    } @empty {
+
+      <p>No doctors found.</p>
+
+    }
+
+  </div>
+
+  <section class="form-section">
+
+    <h2>
+      {{ editingDoctorId() ? 'Edit Doctor' : 'Add Doctor' }}
+    </h2>
+
+    <form (ngSubmit)="saveDoctor()">
+
+      <label>
+        Name
+
+        <input
+          type="text"
+          name="name"
+          [(ngModel)]="form.name"
+          required
+        />
+      </label>
+
+      <label>
+        Specialty
+
+        <input
+          type="text"
+          name="specialty"
+          [(ngModel)]="form.specialty"
+          required
+        />
+      </label>
+
+      <label>
+        Branch
+
+        <select
+          name="branchId"
+          [(ngModel)]="form.branchId"
+          required
+        >
+          @for (branch of branches(); track branch._id) {
+            <option [value]="branch._id">
+              {{ branch.name }}
+            </option>
+          }
+        </select>
+      </label>
+
+      <div class="form-actions">
+
+        <button type="submit">
+          {{ editingDoctorId() ? 'Update Doctor' : 'Save Doctor' }}
+        </button>
+
+        @if (editingDoctorId()) {
+          <button type="button" (click)="cancelEdit()">
+            Cancel
+          </button>
+        }
+
+      </div>
+
+    </form>
+
+  </section>
+
+</section>

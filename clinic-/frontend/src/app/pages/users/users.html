@@ -1,0 +1,120 @@
+<section class="page">
+
+  <h1>Users</h1>
+
+  @if (loading()) {
+    <p>Loading users...</p>
+  }
+
+  @if (message()) {
+    <p class="message">{{ message() }}</p>
+  }
+
+  <div class="user-list">
+
+    @for (user of users(); track user._id) {
+
+      <article class="user-card">
+
+        <h2>
+          {{ user.name }}
+        </h2>
+
+        <p>
+          {{ user.email }}
+        </p>
+
+        <p>
+          📱 {{ user.phone }}
+        </p>
+
+        <p class="role">
+          {{ user.role }}
+        </p>
+
+      </article>
+
+    } @empty {
+
+      <p>No users found.</p>
+
+    }
+
+  </div>
+
+  <section class="form-section">
+
+    <h2>
+      Register User
+    </h2>
+
+    <form (ngSubmit)="registerUser()">
+
+      <label>
+        Name
+
+        <input
+          type="text"
+          name="name"
+          [(ngModel)]="form.name"
+          required
+        />
+      </label>
+
+      <label>
+        Email
+
+        <input
+          type="email"
+          name="email"
+          [(ngModel)]="form.email"
+          required
+        />
+      </label>
+
+      <label>
+        Phone
+
+        <input
+          type="text"
+          name="phone"
+          [(ngModel)]="form.phone"
+          required
+        />
+      </label>
+
+      <label>
+        Password
+
+        <input
+          type="password"
+          name="password"
+          [(ngModel)]="form.password"
+          required
+        />
+      </label>
+
+      <label>
+        Role
+
+        <select
+          name="role"
+          [(ngModel)]="form.role"
+        >
+          @for (role of roles; track role) {
+            <option [value]="role">
+              {{ role }}
+            </option>
+          }
+        </select>
+      </label>
+
+      <button type="submit">
+        Register
+      </button>
+
+    </form>
+
+  </section>
+
+</section>

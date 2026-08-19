@@ -1,0 +1,72 @@
+.page {
+  width: min(1100px, 92%);
+  margin: 2rem auto;
+}
+
+.message {
+  background: #fff7ed;
+  border: 1px solid #fdba74;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.form-section {
+  background: white;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 0.75rem;
+}
+
+form {
+  display: grid;
+  gap: 1rem;
+}
+
+label {
+  display: grid;
+  gap: 0.4rem;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
+  font: inherit;
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.doctor-list {
+  display: grid;
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(250px, 1fr)
+    );
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.doctor-card {
+  background: white;
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  display: grid;
+  gap: 0.5rem;
+  align-content: start;
+}
+
+.doctor-card.inactive {
+  opacity: 0.55;
+}
+
+.status {
+  font-size: 0.85rem;
+  color: #555;
+}

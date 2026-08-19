@@ -1,0 +1,187 @@
+<section class="page">
+
+  <h1>Appointments</h1>
+
+  @if (loading()) {
+    <p>Loading appointments...</p>
+  }
+
+  @if (message()) {
+    <p class="message">{{ message() }}</p>
+  }
+
+  <div class="appointment-list">
+
+    @for (appointment of appointments(); track appointment._id) {
+
+      <article class="appointment-card">
+
+        <h2>
+          {{ patientName(appointment) }}
+        </h2>
+
+        <p>
+          👨‍⚕️ {{ doctorName(appointment) }}
+        </p>
+
+        <p>
+          🏥 {{ branchName(appointment) }}
+        </p>
+
+        <p>
+          🕒 {{ appointment.time | date: 'medium' }}
+        </p>
+
+        <p class="status status-{{ appointment.status }}">
+          {{ appointment.status }}
+        </p>
+
+        @if (appointment.diagnosis) {
+          <p>
+            Diagnosis: {{ appointment.diagnosis }}
+          </p>
+        }
+
+        @if (appointment.status === 'pending') {
+          <button type="button" (click)="confirmAppointment(appointment._id)">
+            Confirm
+          </button>
+        }
+
+        @if (appointment.status === 'confirmed') {
+          <button type="button" (click)="startComplete(appointment._id)">
+            Complete
+          </button>
+        }
+
+        @if (appointment.status === 'pending' || appointment.status === 'confirmed') {
+          <button type="button" (click)="cancelAppointment(appointment._id)">
+            Cancel
+          </button>
+        }
+
+        @if (completingId() === appointment._id) {
+
+          <form class="complete-form" (ngSubmit)="submitComplete()">
+
+            <label>
+              Diagnosis
+
+              <textarea
+                name="diagnosis"
+                [(ngModel)]="completeForm.diagnosis"
+                required
+              ></textarea>
+            </label>
+
+            <label>
+              Prescription
+
+              <textarea
+                name="prescription"
+                [(ngModel)]="completeForm.prescription"
+              ></textarea>
+            </label>
+
+            <div class="form-actions">
+              <button type="submit">
+                Save
+              </button>
+              <button type="button" (click)="cancelComplete()">
+                Cancel
+              </button>
+            </div>
+
+          </form>
+
+        }
+
+      </article>
+
+    } @empty {
+
+      <p>No appointments found.</p>
+
+    }
+
+  </div>
+
+  <section class="form-section">
+
+    <h2>
+      Book Appointment
+    </h2>
+
+    <form (ngSubmit)="bookAppointment()">
+
+      <label>
+        Patient
+
+        <select
+          name="patientId"
+          [(ngModel)]="form.patientId"
+          required
+        >
+          <option value="" disabled>Select a patient</option>
+          @for (patient of patients(); track patient._id) {
+            <option [value]="patient._id">
+              {{ patient.name }}
+            </option>
+          }
+        </select>
+      </label>
+
+      <label>
+        Doctor
+
+        <select
+          name="doctorId"
+          [(ngModel)]="form.doctorId"
+          required
+        >
+          <option value="" disabled>Select a doctor</option>
+          @for (doctor of doctors(); track doctor._id) {
+            <option [value]="doctor._id">
+              {{ doctor.name }}
+            </option>
+          }
+        </select>
+      </label>
+
+      <label>
+        Branch
+
+        <select
+          name="branchId"
+          [(ngModel)]="form.branchId"
+          required
+        >
+          <option value="" disabled>Select a branch</option>
+          @for (branch of branches(); track branch._id) {
+            <option [value]="branch._id">
+              {{ branch.name }}
+            </option>
+          }
+        </select>
+      </label>
+
+      <label>
+        Time
+
+        <input
+          type="datetime-local"
+          name="time"
+          [(ngModel)]="form.time"
+          required
+        />
+      </label>
+
+      <button type="submit">
+        Book Appointment
+      </button>
+
+    </form>
+
+  </section>
+
+</section>

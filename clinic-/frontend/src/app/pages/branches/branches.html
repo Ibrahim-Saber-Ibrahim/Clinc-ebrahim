@@ -1,0 +1,115 @@
+<section class="page">
+
+  <h1>Branches</h1>
+
+  @if (loading()) {
+    <p>Loading branches...</p>
+  }
+
+  @if (message()) {
+    <p class="message">{{ message() }}</p>
+  }
+
+  <div class="branch-list">
+
+    @for (branch of branches(); track branch._id) {
+
+      <article class="branch-card" [class.inactive]="!branch.isActive">
+
+        <h2>
+          {{ branch.name }}
+        </h2>
+
+        <p>
+          {{ branch.address }}
+        </p>
+
+        @if (branch.phone) {
+          <p>
+            📞 {{ branch.phone }}
+          </p>
+        }
+
+        <p class="status">
+          {{ branch.isActive ? 'Active' : 'Inactive' }}
+        </p>
+
+        <button type="button" (click)="startEdit(branch)">
+          Edit
+        </button>
+
+        @if (branch.isActive) {
+          <button type="button" (click)="deactivateBranch(branch._id)">
+            Deactivate
+          </button>
+        }
+
+      </article>
+
+    } @empty {
+
+      <p>No branches found.</p>
+
+    }
+
+  </div>
+
+  <section class="form-section">
+
+    <h2>
+      {{ editingBranchId() ? 'Edit Branch' : 'Add Branch' }}
+    </h2>
+
+    <form (ngSubmit)="saveBranch()">
+
+      <label>
+        Name
+
+        <input
+          type="text"
+          name="name"
+          [(ngModel)]="form.name"
+          required
+        />
+      </label>
+
+      <label>
+        Address
+
+        <input
+          type="text"
+          name="address"
+          [(ngModel)]="form.address"
+          required
+        />
+      </label>
+
+      <label>
+        Phone
+
+        <input
+          type="text"
+          name="phone"
+          [(ngModel)]="form.phone"
+        />
+      </label>
+
+      <div class="form-actions">
+
+        <button type="submit">
+          {{ editingBranchId() ? 'Update Branch' : 'Save Branch' }}
+        </button>
+
+        @if (editingBranchId()) {
+          <button type="button" (click)="cancelEdit()">
+            Cancel
+          </button>
+        }
+
+      </div>
+
+    </form>
+
+  </section>
+
+</section>
